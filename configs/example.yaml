@@ -1,0 +1,6 @@
+jobs:
+  - id: 1
+    name: Example smart method
+    schedule: "*/3 * * * * *"
+    description: For test
+    method: SimpleExampleMethod
