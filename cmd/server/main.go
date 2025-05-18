@@ -1,8 +1,8 @@
 package main
 
 import (
-	"ameresii_smart_home/example"
 	"ameresii_smart_home/internal/err_stack"
+	"ameresii_smart_home/internal/jobs"
 	"ameresii_smart_home/internal/server"
 	"ameresii_smart_home/pkg/dotenv"
 	"ameresii_smart_home/pkg/jobs_manager"
@@ -16,17 +16,21 @@ import (
 	"time"
 )
 
-type Device struct {
-	Name   string `json:"name"`
-	Status bool   `json:"status"`
-}
-
 var mu sync.Mutex
 
 func main() {
+	server.DevicesMap = make(map[string]server.Device)
+	ctx := context.Background()
+
 	dotenv.Load()
 
-	ctx := context.Background()
+	if err := server.ReceiveDevicesList(); err != nil {
+		log.Print(err_stack.WithStack(fmt.Errorf("receive devices list failed: %v", err)))
+	}
+
+	if err := server.SendSystemStartingNotification(); err != nil {
+		log.Print(err_stack.WithStack(fmt.Errorf("send start notification failed: %v", err)))
+	}
 
 	srv := server.NewServer(smart_home.NewSmartHomeApp(ctx))
 	smartHomeServer := router.New()
@@ -77,5 +81,6 @@ func main() {
 }
 
 func init() {
-	jobs_manager.Register(example.SimpleExampleMethod)
+	jobs_manager.Register(jobs.ExampleJob)
+	jobs_manager.Register(jobs.CheckDevicesState)
 }

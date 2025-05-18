@@ -2,17 +2,79 @@ package server
 
 import (
 	"ameresii_smart_home/internal/err_stack"
+	"ameresii_smart_home/pkg/my_heat"
 	"ameresii_smart_home/pkg/telegram"
+	"encoding/json"
 	"fmt"
 	"github.com/valyala/fasthttp"
 	"log"
 	"net/http"
+	"os"
 )
 
 func (s Server) HandlerMyheatDevicesList(ctx *fasthttp.RequestCtx) {
+	login := os.Getenv("MYHEAT_LOGIN")
+	key := os.Getenv("MYHEAT_API_KEY")
+
+	ctx.Response.Header.Set("Content-Type", "application/json; charset=UTF-8")
+
+	devicesList, err := my_heat.MyHeatGetDevices(login, key)
+	if err != nil {
+		ctx.Response.SetStatusCode(http.StatusInternalServerError)
+
+		res := &ErrorResponse{
+			Status:  http.StatusInternalServerError,
+			Message: "Internal Server Error",
+			Details: fmt.Sprintf("myheat endpoint not available"),
+		}
+
+		err = json.NewEncoder(ctx).Encode(res)
+		if err != nil {
+			log.Print(err_stack.WithStack(fmt.Errorf("error json encode: %v", err)))
+		}
+
+		return
+	}
+
+	ctx.Response.SetStatusCode(http.StatusOK)
+
+	resBody := DeviceListResponse{Devices: make([]*Device, 0)}
+	for _, device := range devicesList {
+		newDevice := &Device{
+			Name:      device.Name,
+			ID:        device.ID,
+			State:     device.Severity,
+			StateDesc: device.SeverityDesc,
+		}
+
+		resBody.Devices = append(resBody.Devices, newDevice)
+		DevicesMap[device.Name] = *newDevice
+	}
+
+	if err = json.NewEncoder(ctx).Encode(&resBody); err != nil {
+		log.Print(err_stack.WithStack(fmt.Errorf("error json encode: %v", err)))
+	}
+
+	return
+
+}
+
+func (s Server) HandlerMyheatDevicesList2(ctx *fasthttp.RequestCtx) {
+	login := os.Getenv("MYHEAT_LOGIN")
+	key := os.Getenv("MYHEAT_API_KEY")
+
+	result, err := my_heat.MyHeatGetDeviceInfo(login, key, 75197)
+	if err != nil {
+		log.Print(err)
+	}
+
 	ctx.Response.Header.Set("Content-Type", "application/json; charset=UTF-8")
 	ctx.Response.SetStatusCode(http.StatusNoContent)
-	err := telegram.SendMessage("some text")
+	err = telegram.SendMessage(fmt.Sprintf("%v", result))
+	err = telegram.SendMessage(fmt.Sprintf("%v", result.Heaters[0]))
+	err = telegram.SendMessage(fmt.Sprintf("%v", result.Envs[0]))
+	err = telegram.SendMessage(fmt.Sprintf("%v", result.Envs[1]))
+	err = telegram.SendMessage(fmt.Sprintf("%v", result.Envs[2]))
 	log.Print(err_stack.WithStack(err))
 	log.Print(err_stack.WithStack(fmt.Errorf("some text")))
 }

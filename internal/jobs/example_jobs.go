@@ -1,11 +1,11 @@
-package example
+package jobs
 
 import (
 	"log"
 	"math/rand"
 )
 
-func SimpleExampleMethod() {
+func ExampleJob() {
 	num := rand.Intn(100)
 
 	switch {
