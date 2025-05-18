@@ -28,6 +28,8 @@ func CheckDevicesState() {
 
 		var message string
 		switch deviceInfo.Severity {
+		case my_heat.SeverityNormalState:
+			continue
 		case my_heat.SeverityUnknownState:
 			message = fmt.Sprintf("Состояние объекта %s неизвестно:\nДетали:\n", device.Name)
 		case my_heat.SeverityWarningState:
