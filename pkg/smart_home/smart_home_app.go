@@ -22,10 +22,8 @@ func NewSmartHomeApp(ctx context.Context) App {
 	return smartHome
 }
 
-func (a *App) Run(ctx context.Context, configName string) error {
-	cfgManager := config_manager.NewManager(configName)
-
-	for _, jobConfig := range cfgManager.Config().Jobs {
+func (a *App) Run(ctx context.Context) error {
+	for _, jobConfig := range config_manager.SmartHomeConfig.Config().Jobs {
 		job, err := a.produceJob(ctx, jobConfig.Method)
 		if err != nil {
 			return err_stack.WithStack(err)

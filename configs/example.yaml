@@ -1,3 +1,14 @@
+system_goal_params:
+  object:
+    - name: main_home
+      heating_mode: fast
+      room_temperature: 24
+      boiler_temperature: 65
+    - name: secondary_home
+      heating_mode: slow
+      room_temperature: 0
+      boiler_temperature: 0
+
 jobs:
   - id: 1
     name: Example smart method

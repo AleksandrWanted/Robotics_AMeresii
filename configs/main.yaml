@@ -1,3 +1,10 @@
+system_goal_params:
+    object:
+    - name: main_home
+      heating_mode: fast
+      room_temperature: 23
+      boiler_temperature: 60
+
 jobs:
   - id: 1
     name: Проверка состояния оборудования системы

@@ -1,16 +1,21 @@
 package my_heat
 
 type MyHeatRequestBody struct {
-	Action   string `json:"action,omitempty"`
-	Login    string `json:"login,omitempty"`
-	Key      string `json:"key,omitempty"`
-	DeviceID int    `json:"deviceId,omitempty"`
+	Action     string `json:"action,omitempty"`
+	Login      string `json:"login,omitempty"`
+	Key        string `json:"key,omitempty"`
+	DeviceID   int    `json:"deviceId,omitempty"`
+	ObjID      int    `json:"objId,omitempty"`
+	Goal       int    `json:"goal,omitempty"`
+	ChangeMode int    `json:"changeMode,omitempty"`
 }
 
 type MyHeatResponseBody struct {
 	Data        *Data `json:"data,omitempty"`
 	Err         int   `json:"err,omitempty"`
 	RefreshPage bool  `json:"refreshPage,omitempty"`
+	Schedule    int   `json:"schedule,omitempty"`
+	HeatingMode int   `json:"heatingMode,omitempty"`
 }
 
 type Data struct {

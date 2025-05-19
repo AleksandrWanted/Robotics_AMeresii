@@ -4,6 +4,7 @@ import (
 	"ameresii_smart_home/internal/err_stack"
 	"ameresii_smart_home/internal/jobs"
 	"ameresii_smart_home/internal/server"
+	"ameresii_smart_home/pkg/config_manager"
 	"ameresii_smart_home/pkg/dotenv"
 	"ameresii_smart_home/pkg/jobs_manager"
 	"ameresii_smart_home/pkg/smart_home"
@@ -12,6 +13,7 @@ import (
 	"github.com/fasthttp/router"
 	"github.com/valyala/fasthttp"
 	"log"
+	"os"
 	"sync"
 	"time"
 )
@@ -23,6 +25,15 @@ func main() {
 	ctx := context.Background()
 
 	dotenv.Load()
+
+	confFileName := os.Getenv("CONF_FILE_NAME")
+	cfgPath := fmt.Sprintf("configs/%s.yaml", confFileName)
+
+	if err := config_manager.CheckCfgAvailability(cfgPath); err != nil {
+		log.Fatalf("configuration file %s.yaml not found: %v", confFileName, err)
+	}
+
+	config_manager.SmartHomeConfig = config_manager.NewManager(cfgPath)
 
 	if err := server.ReceiveDevicesList(); err != nil {
 		log.Print(err_stack.WithStack(fmt.Errorf("receive devices list failed: %v", err)))

@@ -1,6 +1,7 @@
 package server
 
 import (
+	"ameresii_smart_home/pkg/config_manager"
 	"ameresii_smart_home/pkg/my_heat"
 	"ameresii_smart_home/pkg/smart_home"
 	"ameresii_smart_home/pkg/telegram"
@@ -42,6 +43,19 @@ func ReceiveDevicesList() error {
 			ID:        device.ID,
 			State:     device.Severity,
 			StateDesc: device.SeverityDesc,
+		}
+	}
+
+	for _, obj := range config_manager.SmartHomeConfig.Config().SystemGoalParams.Objects {
+		for _, device := range deviceList {
+			if obj.Name == device.Name {
+				config_manager.SmartHomeConfig.EditObjGoalParamsByName(obj.Name, config_manager.Object{
+					ID:                device.ID,
+					RoomTemperature:   obj.RoomTemperature,
+					BoilerTemperature: obj.BoilerTemperature,
+				})
+				break
+			}
 		}
 	}
 
