@@ -94,4 +94,5 @@ func main() {
 func init() {
 	jobs_manager.Register(jobs.ExampleJob)
 	jobs_manager.Register(jobs.CheckDevicesState)
+	jobs_manager.Register(jobs.ControlTemperature)
 }

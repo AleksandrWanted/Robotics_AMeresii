@@ -11,3 +11,8 @@ jobs:
     schedule: "0 0/10 * 1/1 * ?"
     description: Проверить статус всего оборудования в каждой подключенной системе
     method: CheckDevicesState
+  - id: 2
+    name: Регулирование температуры контура котла
+    schedule: "0 0/5 * 1/1 * ?"
+    description: Регулировка температуры контура котла в зависимости от текущих и целевых значений
+    method: ControlTemperature

@@ -6,7 +6,7 @@ const (
 	SeverityWarningState  = 32
 	SeverityCriticalState = 64
 
-	typeCircuitTemperature = "circuit_temperature"
-	typeRoomTemperature    = "room_temperature"
-	typeBoilerTemperature  = "boiler_temperature"
+	TypeCircuitTemperature = "circuit_temperature"
+	TypeRoomTemperature    = "room_temperature"
+	TypeBoilerTemperature  = "boiler_temperature"
 )
