@@ -9,3 +9,12 @@ type ErrorResponse struct {
 type DeviceListResponse struct {
 	Devices []*Device `json:"devices"`
 }
+
+type SwitchPirSensorActivityStateRequest struct {
+	Activity bool `json:"activity"`
+}
+
+type ArduinoSensorStateRequest struct {
+	Room        string `json:"room"`
+	SensorState string `json:"sensor_state"`
+}

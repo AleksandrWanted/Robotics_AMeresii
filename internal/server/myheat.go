@@ -3,7 +3,6 @@ package server
 import (
 	"ameresii_smart_home/internal/err_stack"
 	"ameresii_smart_home/pkg/my_heat"
-	"ameresii_smart_home/pkg/telegram"
 	"encoding/json"
 	"fmt"
 	"github.com/valyala/fasthttp"
@@ -57,24 +56,4 @@ func (s Server) HandlerMyheatDevicesList(ctx *fasthttp.RequestCtx) {
 
 	return
 
-}
-
-func (s Server) HandlerMyheatDevicesList2(ctx *fasthttp.RequestCtx) {
-	login := os.Getenv("MYHEAT_LOGIN")
-	key := os.Getenv("MYHEAT_API_KEY")
-
-	result, err := my_heat.MyHeatGetDeviceInfo(login, key, 75197)
-	if err != nil {
-		log.Print(err)
-	}
-
-	ctx.Response.Header.Set("Content-Type", "application/json; charset=UTF-8")
-	ctx.Response.SetStatusCode(http.StatusNoContent)
-	err = telegram.SendMessage(fmt.Sprintf("%v", result))
-	err = telegram.SendMessage(fmt.Sprintf("%v", result.Heaters[0]))
-	err = telegram.SendMessage(fmt.Sprintf("%v", result.Envs[0]))
-	err = telegram.SendMessage(fmt.Sprintf("%v", result.Envs[1]))
-	err = telegram.SendMessage(fmt.Sprintf("%v", result.Envs[2]))
-	log.Print(err_stack.WithStack(err))
-	log.Print(err_stack.WithStack(fmt.Errorf("some text")))
 }

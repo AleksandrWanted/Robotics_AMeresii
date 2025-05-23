@@ -48,7 +48,13 @@ func main() {
 
 	smartHomeServer.POST("/api/system/run", srv.HandlerSystemRun)
 
+	smartHomeServer.POST("/api/system/sensors/pir/activity", srv.HandlerSystemPirSwitchActivityState)
+
 	smartHomeServer.POST("/api/myheat/devices/list", srv.HandlerMyheatDevicesList)
+
+	smartHomeServer.POST("/api/arduino/senors/leak", srv.HandlerArduinoLeakSensorState)
+
+	smartHomeServer.POST("/api/arduino/senors/pir", srv.HandlerArduinoPirSensorState)
 
 	httpServer := &fasthttp.Server{
 		Name:                               "AMeresii_SMART_home",   // название (похоже что используется только в заголовке Server)
