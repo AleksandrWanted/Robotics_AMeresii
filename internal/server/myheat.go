@@ -1,10 +1,10 @@
 package server
 
 import (
-	"ameresii_smart_home/internal/err_stack"
-	"ameresii_smart_home/pkg/my_heat"
 	"encoding/json"
 	"fmt"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/internal/err_stack"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/pkg/my_heat"
 	"github.com/valyala/fasthttp"
 	"log"
 	"net/http"

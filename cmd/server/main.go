@@ -1,15 +1,15 @@
 package main
 
 import (
-	"ameresii_smart_home/internal/err_stack"
-	"ameresii_smart_home/internal/jobs"
-	"ameresii_smart_home/internal/server"
-	"ameresii_smart_home/pkg/config_manager"
-	"ameresii_smart_home/pkg/dotenv"
-	"ameresii_smart_home/pkg/jobs_manager"
-	"ameresii_smart_home/pkg/smart_home"
 	"context"
 	"fmt"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/internal/err_stack"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/internal/jobs"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/internal/server"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/pkg/config_manager"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/pkg/dotenv"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/pkg/jobs_manager"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/pkg/smart_home"
 	"github.com/fasthttp/router"
 	"github.com/valyala/fasthttp"
 	"log"

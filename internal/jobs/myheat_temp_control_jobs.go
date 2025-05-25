@@ -1,12 +1,12 @@
 package jobs
 
 import (
-	"ameresii_smart_home/internal/err_stack"
-	"ameresii_smart_home/internal/server"
-	"ameresii_smart_home/pkg/config_manager"
-	"ameresii_smart_home/pkg/my_heat"
-	"ameresii_smart_home/pkg/telegram"
 	"fmt"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/internal/err_stack"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/internal/server"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/pkg/config_manager"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/pkg/my_heat"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/pkg/telegram"
 	"log"
 	"os"
 	"strconv"

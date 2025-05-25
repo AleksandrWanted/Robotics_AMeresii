@@ -1,11 +1,11 @@
 package server
 
 import (
-	"ameresii_smart_home/pkg/config_manager"
-	"ameresii_smart_home/pkg/my_heat"
-	"ameresii_smart_home/pkg/smart_home"
-	"ameresii_smart_home/pkg/telegram"
 	"fmt"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/pkg/config_manager"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/pkg/my_heat"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/pkg/smart_home"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/pkg/telegram"
 	"os"
 )
 

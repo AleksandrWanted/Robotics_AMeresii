@@ -1,12 +1,12 @@
 package smart_home
 
 import (
-	"ameresii_smart_home/internal/err_stack"
-	"ameresii_smart_home/pkg/config_manager"
-	"ameresii_smart_home/pkg/cronrunner"
-	"ameresii_smart_home/pkg/jobs_manager"
 	"context"
 	"fmt"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/internal/err_stack"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/pkg/config_manager"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/pkg/cronrunner"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/pkg/jobs_manager"
 	"github.com/labstack/gommon/log"
 )
 

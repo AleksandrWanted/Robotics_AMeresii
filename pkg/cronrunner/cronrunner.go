@@ -1,8 +1,8 @@
 package cronrunner
 
 import (
-	"ameresii_smart_home/internal/err_stack"
 	"context"
+	"github.com/AleksandrWanted/AMeresii_SMART_HOME/internal/err_stack"
 	"github.com/google/uuid"
 	"github.com/robfig/cron/v3"
 	"time"

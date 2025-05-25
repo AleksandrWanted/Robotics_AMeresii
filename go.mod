@@ -1,4 +1,4 @@
-module ameresii_smart_home
+module github.com/AleksandrWanted/AMeresii_SMART_HOME
 
 go 1.23.3
 
